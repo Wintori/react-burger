@@ -1,21 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import AppHeader from './components/AppHeader/app-header'
-import BurgerIngredients from './components/BurgerIngredients/burger-ingredients';
-import BurgerConstructor from './components/BurgerConstructor/burger-constructor';
+import AppHeader from './components/app-header/app-header'
+import BurgerIngredients from './components/burger-ingredients/burger-ingredients';
+import BurgerConstructor from './components/burger-constructor/burger-constructor';
 
 function App() {
   return (
     <div className="App">
-      
+      <header className='header'>
         <AppHeader />
-        <body style={{ width: "100%", maxWidth: "1239px", padding: '0', margin: '0 auto 40px', display: 'flex', justifyContent: 'space-between' }}>
+      </header>
+        
+      <main className='content'>
 
-          <BurgerIngredients />
-          <BurgerConstructor />
+        <BurgerIngredients />
+        <BurgerConstructor />
 
-        </body>
+      </main>
     </div>
   );
 }

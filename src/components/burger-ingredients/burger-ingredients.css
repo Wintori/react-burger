@@ -1,0 +1,40 @@
+.ingredients__buttons {
+    display: flex;
+}
+
+.ingredients__content {
+    height: 664px;
+    overflow-y: scroll;
+}
+
+.ingredients__list {
+    display: grid;
+    grid-template-columns: 272px 272px;
+    grid-template-rows: 208px;
+    column-gap: 24px;
+    row-gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ingredients__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ingredients__image {
+    width: 240px;
+}
+
+.ingredients__price {
+    display: flex;
+}
+
+.ingredients__name {
+    height: -webkit-fill-available;
+    text-align: center;
+}
