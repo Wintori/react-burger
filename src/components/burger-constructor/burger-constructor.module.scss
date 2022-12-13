@@ -1,0 +1,24 @@
+.list {
+    overflow-y: scroll;
+    max-height: 656px;
+}
+
+.list::-webkit-scrollbar{
+    padding: 20px;
+}
+
+.contentBottom {
+    display: flex;
+    margin-bottom: 52px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.blockAmount {
+    display: flex;
+    align-items: center;
+}
+
+.textAmount {
+    margin: 0 9.5px 0 0;
+}
