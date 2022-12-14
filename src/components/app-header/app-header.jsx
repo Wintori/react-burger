@@ -39,7 +39,6 @@ const AppHeader = (props) => {
             </ul>
         </nav>
     );
-
 }
 
 export default AppHeader;

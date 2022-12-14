@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import IngredientItemStyle from './ingredient-item.module.scss'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientDetails from '../ingredient-details/ingredient-details';
@@ -28,5 +29,10 @@ const IngredientItem = (props) => {
         </>
     );
 };
+
+IngredientItem.propTypes = {
+    data: PropTypes.object.isRequired
+}
+
 
 export default IngredientItem;

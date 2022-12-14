@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ingredientsListStyles from './ingredients-list.module.scss'
 import ConstructorItem from '../constructor-item/constructor-item';
 
@@ -37,6 +38,10 @@ const IngredientsList = (props) => {
             }
         </ul>
     );
+}
+
+IngredientsList.propTypes = {
+    data: PropTypes.array.isRequired
 }
 
 export default IngredientsList;

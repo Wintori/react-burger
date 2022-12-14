@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Modal from '../modal/modal';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import OrderDetailsStyles from './order-details.module.scss';
@@ -26,6 +27,11 @@ const OrderDetails = (props) => {
         ),
         modalRoot
     );
+}
+
+OrderDetails.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    overlayHandler: PropTypes.func.isRequired
 }
 
 export default OrderDetails;

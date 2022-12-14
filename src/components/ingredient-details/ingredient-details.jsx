@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Modal from '../modal/modal';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetailsStyles from './ingredient-details.module.scss';
 
 const modalRoot = document.getElementById("react-modals");
@@ -46,6 +47,12 @@ const IngredientDetails = (props) => {
         ),
         modalRoot
     );
+}
+
+IngredientDetails.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    overlayHandler: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
 }
 
 export default IngredientDetails;

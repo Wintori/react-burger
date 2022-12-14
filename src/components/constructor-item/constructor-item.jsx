@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ConstructorItemStyle from './constructor-item.module.scss'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -21,5 +22,11 @@ const ConstructorItem = (props) => {
         </li>
     );
 };
+
+ConstructorItem.propTypes = {
+    type: PropTypes.string,
+    isLocked: PropTypes.bool,
+    data: PropTypes.object.isRequired
+}
 
 export default ConstructorItem;

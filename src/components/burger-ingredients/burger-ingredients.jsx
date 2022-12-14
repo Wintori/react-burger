@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import IngredientsButtons from '../ingredients-buttons/ingredients-buttons';
 import BurgerIngredientsStyles from './burger-ingredients.module.scss';
 import IngredientItem from '../ingredient-item/ingredient-item';
@@ -59,6 +60,10 @@ const BurgerIngredients = (props) => {
             </div>
         </section>
     );
+}
+
+BurgerIngredients.propTypes = {
+    data: PropTypes.array.isRequired
 }
 
 export default BurgerIngredients;

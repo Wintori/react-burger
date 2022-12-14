@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerConstructorStyles from './burger-constructor.module.scss'
 import IngredientsList from '../ingredients-list/ingredients-list';
@@ -30,6 +31,10 @@ const BurgerConstructor = (props) => {
             </div>
         </section>
     );
+}
+
+BurgerConstructor.propTypes = {
+    data: PropTypes.array.isRequired
 }
 
 export default BurgerConstructor;
