@@ -8,10 +8,10 @@ const checkErrors = (res) => {
     return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-const getData = (fn) => {
+const getData = (stateChanger) => {
     return fetch(url)
       .then((res) => checkErrors(res))
-      .then(data => fn(data.data))
+      .then(data => stateChanger(data.data))
       .catch((error) => {
         console.log(error);
       })
