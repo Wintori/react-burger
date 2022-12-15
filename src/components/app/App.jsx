@@ -4,21 +4,14 @@ import AppStyles from './App.module.scss'
 import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import api from '../../utils/api';
+import { getData } from '../../utils/api';
 
-const App = (props) => {
-  const url = 'https://norma.nomoreparties.space/api/ingredients'
-  const [data, setData] = useState([''])
+const App = () => {
+  const [data, setData] = useState([])
 
   useEffect(() => {
-    const getData = () => {
-      return fetch(url)
-        .then(res => res.json())
-        .then(data => setData(data.data))
-        .catch((res) => api.checkResult(res))
-    }
-    getData()
-  }, [setData])
+    getData(setData)
+  }, [])
 
 
   return (

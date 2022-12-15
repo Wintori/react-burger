@@ -9,7 +9,7 @@ const IngredientsList = (props) => {
             {
                 props.data.map((item) => {
                     return (
-                        item.type === 'bun' && <ConstructorItem data={item} key={item._id} type={'top'} isLocked={true} />
+                        item === props.data[0] && <ConstructorItem data={item} key={item._id} type={'top'} isLocked={true} />
                     );
                 })
             }
@@ -32,7 +32,7 @@ const IngredientsList = (props) => {
             {
                 props.data.map((item) => {
                     return (
-                        item.type === 'bun' && <ConstructorItem data={item} key={item._id} type={'bottom'} isLocked={true} />
+                        item === props.data[0] && <ConstructorItem data={item} key={item._id} type={'bottom'} isLocked={true} />
                     );
                 })
             }
@@ -41,7 +41,22 @@ const IngredientsList = (props) => {
 }
 
 IngredientsList.propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.arrayOf(
+        PropTypes.shape({
+            calories: PropTypes.number,
+            carbohydrates: PropTypes.number,
+            fat: PropTypes.number,
+            image: PropTypes.string,
+            image_large: PropTypes.string,
+            image_mobile: PropTypes.string,
+            name: PropTypes.string,
+            price: PropTypes.number,
+            proteins: PropTypes.number,
+            type: PropTypes.string,
+            __v: PropTypes.number,
+            _id: PropTypes.string
+        })
+    ).isRequired
 }
 
 export default IngredientsList;

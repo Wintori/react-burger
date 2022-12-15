@@ -14,7 +14,7 @@ const BurgerConstructor = (props) => {
     }
 
     return (
-        <section className= 'mt-25'>
+        <section className='mt-25'>
             <div className={`${BurgerConstructorStyles.list} pr-2`}>
                 <IngredientsList data={props.data} />
             </div>
@@ -34,7 +34,22 @@ const BurgerConstructor = (props) => {
 }
 
 BurgerConstructor.propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.arrayOf(
+        PropTypes.shape({
+            calories: PropTypes.number,
+            carbohydrates: PropTypes.number,
+            fat: PropTypes.number,
+            image: PropTypes.string,
+            image_large: PropTypes.string,
+            image_mobile: PropTypes.string,
+            name: PropTypes.string,
+            price: PropTypes.number,
+            proteins: PropTypes.number,
+            type: PropTypes.string,
+            __v: PropTypes.number,
+            _id: PropTypes.string
+        })
+    ).isRequired
 }
 
 export default BurgerConstructor;
