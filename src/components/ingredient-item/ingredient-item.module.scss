@@ -1,0 +1,21 @@
+.item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.image {
+    width: 240px;
+}
+
+.price {
+    display: flex;
+}
+
+.name {
+    height: -webkit-fill-available;
+    text-align: center;
+}

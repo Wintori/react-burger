@@ -1,0 +1,46 @@
+.nav {
+    background-color: #1C1C21;
+    color: white;
+    margin: 40px 40px 0 40px;
+}
+
+.list {
+    width: 100%;
+    max-width: 1239px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+}
+
+.item {
+    margin: 0 49px 0 0;
+}
+
+.item:nth-child(2) {
+    margin: 0;
+}
+
+.item:nth-child(3) {
+    margin: 0 0 0 132px;
+}
+
+.item:nth-child(4) {
+    margin: 0 0 0 auto;
+}
+
+.link {
+    display: flex;
+    color: white;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 1920px) {
+
+    .nav {
+        margin: 0;
+    }
+
+}
