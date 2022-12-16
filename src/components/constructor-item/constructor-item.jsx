@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ConstructorItemStyle from './constructor-item.module.scss'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { dataItemPropTypes } from '../../utils/constants';
 
 const ConstructorItem = (props) => {
     const { type, isLocked } = props
@@ -26,20 +27,7 @@ const ConstructorItem = (props) => {
 ConstructorItem.propTypes = {
     type: PropTypes.string,
     isLocked: PropTypes.bool,
-    data: PropTypes.shape({
-        calories: PropTypes.number,
-        carbohydrates: PropTypes.number,
-        fat: PropTypes.number,
-        image: PropTypes.string,
-        image_large: PropTypes.string,
-        image_mobile: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.number,
-        proteins: PropTypes.number,
-        type: PropTypes.string,
-        __v: PropTypes.number,
-        _id: PropTypes.string
-    }).isRequired
+    data: dataItemPropTypes
 }
 
 export default ConstructorItem;

@@ -10,7 +10,9 @@ const App = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    getData(setData)
+    getData()
+    .then(result => setData(result.data))
+    .catch((error) => { console.log(error) })
   }, [])
 
 
@@ -19,7 +21,6 @@ const App = () => {
       <header>
         <AppHeader />
       </header>
-
       <main className={AppStyles.content}>
         <BurgerIngredients data={data} />
         <BurgerConstructor data={data} />

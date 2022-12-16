@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import IngredientsButtons from '../ingredients-buttons/ingredients-buttons';
 import BurgerIngredientsStyles from './burger-ingredients.module.scss';
 import IngredientItem from '../ingredient-item/ingredient-item';
+import { dataPropTypes, dataItemPropTypes } from '../../utils/constants';
 
 
 
@@ -19,6 +20,7 @@ const BurgerIngredients = (props) => {
                     Булки
                 </p>
                 <ul className={BurgerIngredientsStyles.list} id='bun'>
+                    {console.log(props.data)}
                     {
                         props.data.map((item) => {
                             return (
@@ -63,22 +65,7 @@ const BurgerIngredients = (props) => {
 }
 
 BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(
-        PropTypes.shape({
-            calories: PropTypes.number,
-            carbohydrates: PropTypes.number,
-            fat: PropTypes.number,
-            image: PropTypes.string,
-            image_large: PropTypes.string,
-            image_mobile: PropTypes.string,
-            name: PropTypes.string,
-            price: PropTypes.number,
-            proteins: PropTypes.number,
-            type: PropTypes.string,
-            __v: PropTypes.number,
-            _id: PropTypes.string
-        })
-    ).isRequired
+    data: dataPropTypes
 }
 
 export default BurgerIngredients;

@@ -4,6 +4,7 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerConstructorStyles from './burger-constructor.module.scss'
 import IngredientsList from '../ingredients-list/ingredients-list';
 import OrderDetails from '../order-details/order-details';
+import { dataPropTypes } from '../../utils/constants';
 
 
 const BurgerConstructor = (props) => {
@@ -27,29 +28,14 @@ const BurgerConstructor = (props) => {
                     Оформить заказ
                 </Button>
 
-                {isVisible && <OrderDetails onClose={handleModal} overlayHandler={handleModal} />}
+                {isVisible && <OrderDetails onClose={handleModal} />}
             </div>
         </section>
     );
 }
 
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(
-        PropTypes.shape({
-            calories: PropTypes.number,
-            carbohydrates: PropTypes.number,
-            fat: PropTypes.number,
-            image: PropTypes.string,
-            image_large: PropTypes.string,
-            image_mobile: PropTypes.string,
-            name: PropTypes.string,
-            price: PropTypes.number,
-            proteins: PropTypes.number,
-            type: PropTypes.string,
-            __v: PropTypes.number,
-            _id: PropTypes.string
-        })
-    ).isRequired
+    data: dataPropTypes
 }
 
 export default BurgerConstructor;

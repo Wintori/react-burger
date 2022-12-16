@@ -26,8 +26,7 @@ const OrderDetails = (props) => {
 }
 
 OrderDetails.propTypes = {
-    onClose: PropTypes.func.isRequired,
-    overlayHandler: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired
 }
 
 export default OrderDetails;

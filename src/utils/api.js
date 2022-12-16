@@ -1,6 +1,6 @@
-const url = 'https://norma.nomoreparties.space/api/ingredients'
+import {url} from './constants'
 
-const checkErrors = (res) => {
+const checkResponse = (res) => {
     if (res.ok) {
         return res.json();
     }
@@ -8,13 +8,9 @@ const checkErrors = (res) => {
     return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-const getData = (stateChanger) => {
-    return fetch(url)
-      .then((res) => checkErrors(res))
-      .then(data => stateChanger(data.data))
-      .catch((error) => {
-        console.log(error);
-      })
+const getData = () => {
+    return fetch('https://norma.nomoreparties.space/api/ingredients')
+      .then((res) => checkResponse(res))
   }
 
 export {getData};

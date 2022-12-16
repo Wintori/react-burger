@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import IngredientItemStyle from './ingredient-item.module.scss'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import { dataItemPropTypes } from '../../utils/constants';
 
 const IngredientItem = (props) => {
     const { image, price, name } = props.data
@@ -31,20 +32,7 @@ const IngredientItem = (props) => {
 };
 
 IngredientItem.propTypes = {
-    data: PropTypes.shape({
-        calories: PropTypes.number,
-        carbohydrates: PropTypes.number,
-        fat: PropTypes.number,
-        image: PropTypes.string,
-        image_large: PropTypes.string,
-        image_mobile: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.number,
-        proteins: PropTypes.number,
-        type: PropTypes.string,
-        __v: PropTypes.number,
-        _id: PropTypes.string
-    }).isRequired
+    data: dataItemPropTypes
 }
 
 

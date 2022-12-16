@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from '../modal/modal';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetailsStyles from './ingredient-details.module.scss';
+import { dataItemPropTypes } from '../../utils/constants';
 
 const IngredientDetails = (props) => {
 
@@ -48,20 +49,7 @@ const IngredientDetails = (props) => {
 IngredientDetails.propTypes = {
     onClose: PropTypes.func.isRequired,
     overlayHandler: PropTypes.func.isRequired,
-    data: PropTypes.shape({
-        calories: PropTypes.number,
-        carbohydrates: PropTypes.number,
-        fat: PropTypes.number,
-        image: PropTypes.string,
-        image_large: PropTypes.string,
-        image_mobile: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.number,
-        proteins: PropTypes.number,
-        type: PropTypes.string,
-        __v: PropTypes.number,
-        _id: PropTypes.string
-    }).isRequired
+    data: dataItemPropTypes
 }
 
 export default IngredientDetails;

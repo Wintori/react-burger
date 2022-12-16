@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ingredientsListStyles from './ingredients-list.module.scss'
+import ingredientsListStyles from './ingredients-list.module.scss';
 import ConstructorItem from '../constructor-item/constructor-item';
+import { dataPropTypes } from '../../utils/constants';
+
 
 const IngredientsList = (props) => {
     return (
@@ -41,22 +43,7 @@ const IngredientsList = (props) => {
 }
 
 IngredientsList.propTypes = {
-    data: PropTypes.arrayOf(
-        PropTypes.shape({
-            calories: PropTypes.number,
-            carbohydrates: PropTypes.number,
-            fat: PropTypes.number,
-            image: PropTypes.string,
-            image_large: PropTypes.string,
-            image_mobile: PropTypes.string,
-            name: PropTypes.string,
-            price: PropTypes.number,
-            proteins: PropTypes.number,
-            type: PropTypes.string,
-            __v: PropTypes.number,
-            _id: PropTypes.string
-        })
-    ).isRequired
+    data: dataPropTypes
 }
 
 export default IngredientsList;
