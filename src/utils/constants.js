@@ -17,6 +17,6 @@ const dataItemPropTypes = PropTypes.shape({
     _id: PropTypes.string
 })
 
-const dataPropTypes = PropTypes.arrayOf(dataItemPropTypes).isRequired
+const dataPropTypes = PropTypes.arrayOf(dataItemPropTypes)
 
 export {url, dataItemPropTypes, dataPropTypes}

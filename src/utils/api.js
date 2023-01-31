@@ -13,4 +13,16 @@ const getData = () => {
       .then((res) => checkResponse(res))
   }
 
-export {getData};
+const getOrder = (list) => {
+    return fetch('https://norma.nomoreparties.space/api/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            ingredients: list
+        })
+    })
+        .then((res) => checkResponse(res))
+}
+export {getData, getOrder};

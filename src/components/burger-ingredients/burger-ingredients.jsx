@@ -1,13 +1,34 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import IngredientsButtons from '../ingredients-buttons/ingredients-buttons';
 import BurgerIngredientsStyles from './burger-ingredients.module.scss';
 import IngredientItem from '../ingredient-item/ingredient-item';
 import { dataPropTypes, dataItemPropTypes } from '../../utils/constants';
+import { IngredientsContext } from '../../services/burgerContext';
 
 
+const BurgerIngredients = () => {
+    const {data, ingredList, setIngredList } = useContext(IngredientsContext)
 
-const BurgerIngredients = (props) => {
+    // const addToList = (ingred) => {
+    //     const tempList = ingredList
+    //     tempList.push(ingred)
+    //     setIngredList(tempList)
+    // }
+    
+
+    // useEffect(() => {
+
+    //     console.log(ingredList)
+    //     addToList(data[0])
+    //     console.log(ingredList)
+    //     addToList(data[3])
+    //     console.log(ingredList)
+
+    //   }, [data])
+
+    
+
     return (
         <section className='mr-10'>
 
@@ -20,9 +41,8 @@ const BurgerIngredients = (props) => {
                     Булки
                 </p>
                 <ul className={BurgerIngredientsStyles.list} id='bun'>
-                    {console.log(props.data)}
                     {
-                        props.data.map((item) => {
+                        data.map((item) => {
                             return (
                                 item.type === 'bun' && <IngredientItem data={item} key={item._id} />
                             );
@@ -37,7 +57,7 @@ const BurgerIngredients = (props) => {
                 </p>
                 <ul className={BurgerIngredientsStyles.list} id='sauce'>
                     {
-                        props.data.map((item) => {
+                        data.map((item) => {
                             return (
                                 item.type === 'sauce' && <IngredientItem data={item} key={item._id} />
                             );
@@ -51,7 +71,7 @@ const BurgerIngredients = (props) => {
                 </p>
                 <ul className={BurgerIngredientsStyles.list} id='main'>
                     {
-                        props.data.map((item) => {
+                        data.map((item) => {
                             return (
                                 item.type === 'main' && <IngredientItem data={item} key={item._id} />
                             );

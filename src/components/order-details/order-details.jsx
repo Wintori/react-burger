@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../modal/modal';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import OrderDetailsStyles from './order-details.module.scss';
 import Done from '../../images/done.svg'
-
-
+import { BurgerContext } from '../../services/burgerContext';
 
 const OrderDetails = (props) => {
     const { onClose } = props
+    const {order} = useContext(BurgerContext)
+
+    
 
     return (
         <Modal overlayHandler={onClose}>
@@ -16,7 +18,7 @@ const OrderDetails = (props) => {
                 <CloseIcon type="primary" />
             </button>
 
-            <p className={`text text_type_digits-large mb-8 pt-30 ${OrderDetailsStyles.number}`}>034536</p>
+            <p className={`text text_type_digits-large mb-8 pt-30 ${OrderDetailsStyles.number}`}>{order}</p>
             <p className="text text_type_main-medium mb-15">идентификатор заказа</p>
             <img className='mb-15' src={Done} alt='Ready'></img>
             <p className="text text_type_main-default mb-2">Ваш заказ начали готовить</p>
