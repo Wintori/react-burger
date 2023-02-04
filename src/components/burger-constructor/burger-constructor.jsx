@@ -1,44 +1,43 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerConstructorStyles from './burger-constructor.module.scss'
 import IngredientsList from '../ingredients-list/ingredients-list';
 import OrderDetails from '../order-details/order-details';
 import { dataPropTypes } from '../../utils/constants';
-import { BurgerContext } from '../../services/burgerContext';
+import { BurgerContext } from '../../services/index';
 import { getOrder } from '../../utils/api';
 
 
 const BurgerConstructor = () => {
+
+
     const [isVisible, setVisible] = useState(false)
     const { data, price, ingredList, setPrice, setOrder } = useContext(BurgerContext)
 
     function handleModal() {
-
         if (isVisible) {
-            setVisible(() => !isVisible)
+            setVisible((isVisible) => !isVisible)
         }
         else {
             const newOrder = ingredList.map((item) => { return item._id })
             newOrder.push(ingredList.find(item => { return item.type === 'bun' })._id)
-            console.log(newOrder)
 
             getOrder(newOrder)
                 .then(res => setOrder(res.order.number))
                 .catch((error) => { console.log(error) })
 
-            setVisible(() => !isVisible)
-        }
-
-    }
-
-
-    const addBunToPrice = () => {
-        if (ingredList) {
-            return ingredList.find(item => { return item.type === 'bun' }).price
+            setVisible((isVisible) => !isVisible)
         }
     }
 
+
+    const { bun, ingredients } = useMemo(() => {
+        return {
+            bun: ingredList.find(ingredient => ingredient.type === 'bun'),
+            ingredients: ingredList.filter(ingredient => ingredient.type !== 'bun'),
+        }
+    }, [ingredList])
 
     useEffect(() => {
         const changePrice = () => {
@@ -55,10 +54,13 @@ const BurgerConstructor = () => {
         changePrice()
     }, [data, setPrice])
 
+
+
+
     return (
         <section className='mt-25'>
             <div className={`${BurgerConstructorStyles.list} pr-2`}>
-                <IngredientsList />
+                <IngredientsList bun={bun} ingredients={ingredients} />
             </div>
             <div className={`${BurgerConstructorStyles.contentBottom} mt-10`}>
                 <div className={`${BurgerConstructorStyles.blockAmount} mr-10`}>
@@ -73,10 +75,6 @@ const BurgerConstructor = () => {
             </div>
         </section>
     );
-}
-
-BurgerConstructor.propTypes = {
-    data: dataPropTypes
 }
 
 export default BurgerConstructor;

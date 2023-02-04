@@ -5,13 +5,13 @@ import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { getData } from '../../utils/api';
-import { BurgerContext, IngredientsContext } from '../../services/burgerContext';
+import { BurgerContext, IngredientsContext } from '../../services/index';
 
 const App = () => {
   const [data, setData] = useState([])
   const [ingredList, setIngredList] = useState([])
-  const [price, setPrice] = useState(0)
-  const [order, setOrder] = useState()
+  const [price, setPrice] = useState(null)
+  const [order, setOrder] = useState(null)
 
   useEffect(() => {
     getData()
@@ -26,8 +26,6 @@ const App = () => {
         setIngredList(temp)
       })
       .catch((error) => { console.log(error) })
-
-
   }, [])
 
   return (

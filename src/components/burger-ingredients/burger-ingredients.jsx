@@ -1,15 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import IngredientsButtons from '../ingredients-buttons/ingredients-buttons';
 import BurgerIngredientsStyles from './burger-ingredients.module.scss';
 import IngredientItem from '../ingredient-item/ingredient-item';
-import { dataPropTypes, dataItemPropTypes } from '../../utils/constants';
-import { IngredientsContext } from '../../services/burgerContext';
+import { dataPropTypes } from '../../utils/constants';
+import { IngredientsContext } from '../../services/index.js';
 
 
 const BurgerIngredients = () => {
     const { data } = useContext(IngredientsContext)
-
 
     return (
         <section className='mr-10'>
@@ -64,10 +63,6 @@ const BurgerIngredients = () => {
             </div>
         </section>
     );
-}
-
-BurgerIngredients.propTypes = {
-    data: dataPropTypes
 }
 
 export default BurgerIngredients;

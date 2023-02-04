@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
-const url = 'https://norma.nomoreparties.space/api/ingredients'
+const BURGER_API_URL = 'https://norma.nomoreparties.space/api'
+
+
 
 const dataItemPropTypes = PropTypes.shape({
     calories: PropTypes.number,
@@ -15,8 +17,8 @@ const dataItemPropTypes = PropTypes.shape({
     type: PropTypes.string,
     __v: PropTypes.number,
     _id: PropTypes.string
-})
+}).isRequired
 
-const dataPropTypes = PropTypes.arrayOf(dataItemPropTypes)
+const dataPropTypes = PropTypes.arrayOf(dataItemPropTypes).isRequired
 
-export { url, dataItemPropTypes, dataPropTypes }
+export { BURGER_API_URL, dataItemPropTypes, dataPropTypes }

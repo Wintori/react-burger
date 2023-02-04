@@ -1,4 +1,4 @@
-import { url } from './constants'
+import { BURGER_API_URL } from './constants'
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -9,12 +9,12 @@ const checkResponse = (res) => {
 }
 
 const getData = () => {
-    return fetch('https://norma.nomoreparties.space/api/ingredients')
+    return fetch(`${BURGER_API_URL}/ingredients`)
         .then((res) => checkResponse(res))
 }
 
 const getOrder = (list) => {
-    return fetch('https://norma.nomoreparties.space/api/orders', {
+    return fetch(`${BURGER_API_URL}/orders`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json; charset=UTF-8'

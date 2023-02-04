@@ -12,3 +12,26 @@
     box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
     border-radius: 40px;
 }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: -webkit-fill-available;
+}
+
+.button {
+    display: flex;
+    padding: 0;
+    align-self: center;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(0, 0, 0);
+    opacity: 0;
+    background: transparent;
+    opacity: 1;
+}
+
+.button:hover {
+    opacity: 0.6;
+}

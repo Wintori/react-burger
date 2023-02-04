@@ -13,13 +13,8 @@ const IngredientDetails = (props) => {
 
     return (
 
-        <Modal overlayHandler={props.overlayHandler}>
-            <div className={`${IngredientDetailsStyles.header} pl-10 pr-10 pt-10`}>
-                <p className="text text_type_main-large">Детали ингредиента</p>
-                <button className={`${IngredientDetailsStyles.button}`} type='button' onClick={onClose}>
-                    <CloseIcon type="primary" />
-                </button>
-            </div>
+        <Modal overlayHandler={props.overlayHandler} title='Детали ингредиента'>
+            
             <img className='mb-4' src={image_large} alt={name}></img>
 
             <p className="text text_type_main-medium mb-8">{name}</p>
