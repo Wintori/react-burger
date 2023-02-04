@@ -4,14 +4,10 @@ import IngredientItemStyle from './ingredient-item.module.scss'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { dataItemPropTypes } from '../../utils/constants';
-import { IngredientsContext } from '../../services/burgerContext';
 
 const IngredientItem = (props) => {
     const { image, price, name } = props.data
     const [isVisible, setVisible] = useState(false)
-
-    const { ingredList, setIngredList } = useContext(IngredientsContext)
-
 
     function handleModal() {
         setVisible(() => !isVisible)

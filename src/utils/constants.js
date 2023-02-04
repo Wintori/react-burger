@@ -19,4 +19,4 @@ const dataItemPropTypes = PropTypes.shape({
 
 const dataPropTypes = PropTypes.arrayOf(dataItemPropTypes)
 
-export {url, dataItemPropTypes, dataPropTypes}
+export { url, dataItemPropTypes, dataPropTypes }

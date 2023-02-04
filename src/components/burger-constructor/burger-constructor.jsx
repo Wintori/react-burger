@@ -11,34 +11,54 @@ import { getOrder } from '../../utils/api';
 
 const BurgerConstructor = () => {
     const [isVisible, setVisible] = useState(false)
-    const {data, price, order, setPrice, setOrder} = useContext(BurgerContext)
+    const { data, price, ingredList, setPrice, setOrder } = useContext(BurgerContext)
 
     function handleModal() {
 
-        const newOrder = data.map((item) => {return item._id })
-        
-        getOrder(newOrder)
-        .then(res => setOrder(res.order.number))
-        .catch((error) => { console.log(error) })
-        
-        setVisible(() => !isVisible)
+        if (isVisible) {
+            setVisible(() => !isVisible)
+        }
+        else {
+            const newOrder = ingredList.map((item) => { return item._id })
+            newOrder.push(ingredList.find(item => { return item.type === 'bun' })._id)
+            console.log(newOrder)
+
+            getOrder(newOrder)
+                .then(res => setOrder(res.order.number))
+                .catch((error) => { console.log(error) })
+
+            setVisible(() => !isVisible)
+        }
+
     }
 
-    
+
+    const addBunToPrice = () => {
+        if (ingredList) {
+            return ingredList.find(item => { return item.type === 'bun' }).price
+        }
+    }
 
 
     useEffect(() => {
-
         const changePrice = () => {
-          const totalPrice = data.reduce((prev, curr) => prev + curr.price, 0)
-          setPrice(totalPrice)  
+            let totalPrice = ingredList.reduce((prev, curr) => {
+                if (curr.type === 'bun') {
+                    return prev + curr.price * 2
+                } else {
+                    return prev + curr.price
+                }
+
+            }, 0)
+            setPrice(totalPrice)
         }
         changePrice()
-      }, [data, setPrice])
+    }, [data, setPrice])
+
     return (
         <section className='mt-25'>
             <div className={`${BurgerConstructorStyles.list} pr-2`}>
-                <IngredientsList/>
+                <IngredientsList />
             </div>
             <div className={`${BurgerConstructorStyles.contentBottom} mt-10`}>
                 <div className={`${BurgerConstructorStyles.blockAmount} mr-10`}>

@@ -15,8 +15,19 @@ const App = () => {
 
   useEffect(() => {
     getData()
-    .then(result => setData(result.data))
-    .catch((error) => { console.log(error) })
+      .then(result => { setData(result.data); return result })
+      .then((res) => {
+        const temp = []
+        temp.push(res.data[0])
+        temp.push(res.data[2])
+        temp.push(res.data[7])
+        temp.push(res.data[9])
+        temp.push(res.data[12])
+        setIngredList(temp)
+      })
+      .catch((error) => { console.log(error) })
+
+
   }, [])
 
   return (
@@ -25,12 +36,12 @@ const App = () => {
         <AppHeader />
       </header>
       <main className={AppStyles.content}>
-        <IngredientsContext.Provider value={{ data, ingredList, setIngredList}}>
+        <IngredientsContext.Provider value={{ data, ingredList, setIngredList }}>
           <BurgerIngredients />
         </IngredientsContext.Provider>
 
-        <BurgerContext.Provider value={{data, price, order, setPrice, setOrder}}>
-            <BurgerConstructor/>
+        <BurgerContext.Provider value={{ data, ingredList, price, order, setPrice, setOrder, setIngredList }}>
+          <BurgerConstructor />
         </BurgerContext.Provider>
       </main>
     </div>

@@ -1,4 +1,4 @@
-import {url} from './constants'
+import { url } from './constants'
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -10,8 +10,8 @@ const checkResponse = (res) => {
 
 const getData = () => {
     return fetch('https://norma.nomoreparties.space/api/ingredients')
-      .then((res) => checkResponse(res))
-  }
+        .then((res) => checkResponse(res))
+}
 
 const getOrder = (list) => {
     return fetch('https://norma.nomoreparties.space/api/orders', {
@@ -25,4 +25,4 @@ const getOrder = (list) => {
     })
         .then((res) => checkResponse(res))
 }
-export {getData, getOrder};
+export { getData, getOrder };

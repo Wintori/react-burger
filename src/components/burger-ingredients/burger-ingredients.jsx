@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import IngredientsButtons from '../ingredients-buttons/ingredients-buttons';
 import BurgerIngredientsStyles from './burger-ingredients.module.scss';
@@ -8,26 +8,8 @@ import { IngredientsContext } from '../../services/burgerContext';
 
 
 const BurgerIngredients = () => {
-    const {data, ingredList, setIngredList } = useContext(IngredientsContext)
+    const { data } = useContext(IngredientsContext)
 
-    // const addToList = (ingred) => {
-    //     const tempList = ingredList
-    //     tempList.push(ingred)
-    //     setIngredList(tempList)
-    // }
-    
-
-    // useEffect(() => {
-
-    //     console.log(ingredList)
-    //     addToList(data[0])
-    //     console.log(ingredList)
-    //     addToList(data[3])
-    //     console.log(ingredList)
-
-    //   }, [data])
-
-    
 
     return (
         <section className='mr-10'>
