@@ -1,14 +1,45 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import IngredientsButtons from '../ingredients-buttons/ingredients-buttons';
 import BurgerIngredientsStyles from './burger-ingredients.module.scss';
 import IngredientItem from '../ingredient-item/ingredient-item';
-import { dataPropTypes } from '../../utils/constants';
-import { IngredientsContext } from '../../services/index.js';
+import { getItemsRequest } from '../../services/actions/ingredients'
 
 
 const BurgerIngredients = () => {
-    const { data } = useContext(IngredientsContext)
+
+    const dispatch = useDispatch()
+    const data = useSelector(store => store.ingredientsReducer.items)
+
+    const refBun = useRef(null);
+    const refMain = useRef(null);
+    const refSauce = useRef(null);
+
+    const [current, setCurrent] = React.useState('one')
+
+    useEffect(() => {
+        switch (current) {
+            case 'one': {
+                refBun.current.scrollIntoView({ behavior: "smooth" })
+                return;
+            }
+            case 'two': {
+                refSauce.current.scrollIntoView({ behavior: "smooth" })
+                return;
+            }
+            case 'three': {
+                refMain.current.scrollIntoView({ behavior: "smooth" })
+                return;
+            }
+        }
+    }, [current])
+
+    useEffect(() => {
+        dispatch(getItemsRequest())
+    }, [])
+
+
 
     return (
         <section className='mr-10'>
@@ -16,47 +47,47 @@ const BurgerIngredients = () => {
             <p className="text text_type_main-large mt-10">
                 Соберите бургер
             </p>
-            <IngredientsButtons />
+            <IngredientsButtons current={current} setCurrent={setCurrent} />
             <div className={`${BurgerIngredientsStyles.content} mt-10`}>
-                <p className="text text_type_main-medium mb-6">
+                <p className="text text_type_main-medium mb-6" ref={refBun}>
                     Булки
                 </p>
-                <ul className={BurgerIngredientsStyles.list} id='bun'>
+                <ul className={BurgerIngredientsStyles.list} id='bun' >
                     {
-                        data.map((item) => {
+                        data ? data.map((item) => {
                             return (
                                 item.type === 'bun' && <IngredientItem data={item} key={item._id} />
                             );
-                        })
+                        }) : ''
 
                     }
 
                 </ul>
 
-                <p className="text text_type_main-medium mt-10 mb-6">
+                <p className="text text_type_main-medium mt-10 mb-6" ref={refSauce}>
                     Соусы
                 </p>
-                <ul className={BurgerIngredientsStyles.list} id='sauce'>
+                <ul className={BurgerIngredientsStyles.list} id='sauce' >
                     {
-                        data.map((item) => {
+                        data ? data.map((item) => {
                             return (
                                 item.type === 'sauce' && <IngredientItem data={item} key={item._id} />
                             );
-                        })
+                        }) : ''
 
                     }
                 </ul>
 
-                <p className="text text_type_main-medium mt-10 mb-6">
+                <p className="text text_type_main-medium mt-10 mb-6" ref={refMain}>
                     Начинки
                 </p>
-                <ul className={BurgerIngredientsStyles.list} id='main'>
+                <ul className={BurgerIngredientsStyles.list} id='main' >
                     {
-                        data.map((item) => {
+                        data ? data.map((item) => {
                             return (
                                 item.type === 'main' && <IngredientItem data={item} key={item._id} />
                             );
-                        })
+                        }) : ''
 
                     }
                 </ul>

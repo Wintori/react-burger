@@ -12,7 +12,6 @@ const getData = () => {
     return fetch(`${BURGER_API_URL}/ingredients`)
         .then((res) => checkResponse(res))
 }
-
 const getOrder = (list) => {
     return fetch(`${BURGER_API_URL}/orders`, {
         method: 'POST',

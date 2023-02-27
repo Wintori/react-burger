@@ -1,36 +1,58 @@
 import React, { useContext, useState, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerConstructorStyles from './burger-constructor.module.scss'
 import IngredientsList from '../ingredients-list/ingredients-list';
 import OrderDetails from '../order-details/order-details';
-import { dataPropTypes } from '../../utils/constants';
-import { BurgerContext } from '../../services/index';
-import { getOrder } from '../../utils/api';
+import { addItem } from '../../services/actions/ingredients'
+import { CHANGE_PRICE, getOrderRequest, REMOVE_BUN } from '../../services/actions/ingredients'
+import { useDrop } from 'react-dnd'
+
 
 
 const BurgerConstructor = () => {
 
+    const dispatch = useDispatch();
 
+    const price = useSelector(store => store.ingredientsReducer.totalPrice)
+    const ingredList = useSelector(store => store.ingredientsReducer.ingredList)
     const [isVisible, setVisible] = useState(false)
-    const { data, price, ingredList, setPrice, setOrder } = useContext(BurgerContext)
 
-    function handleModal() {
-        if (isVisible) {
-            setVisible((isVisible) => !isVisible)
-        }
-        else {
-            const newOrder = ingredList.map((item) => { return item._id })
-            newOrder.push(ingredList.find(item => { return item.type === 'bun' })._id)
-
-            getOrder(newOrder)
-                .then(res => setOrder(res.order.number))
-                .catch((error) => { console.log(error) })
-
-            setVisible((isVisible) => !isVisible)
+    const setIngredList = (item) => {
+        let fl = true;
+        ingredList.map((el) => {
+            if (el.type === item.type && item.type === 'bun') {
+                fl = false;
+            }
+        })
+        if (fl) {
+            return dispatch(addItem(item));
+        } else {
+            let fl1 = true;
+            ingredList.map((el) => {
+                if (el._id === item._id) {
+                    fl1 = false;
+                }
+            })
+            if (fl1) {
+                dispatch({ type: REMOVE_BUN });
+                dispatch(addItem(item));
+            }
         }
     }
 
+    function handleModal() {
+        if (!isVisible) {
+            const newOrder = ingredList.map((item) => { return item._id })
+            newOrder.push(ingredList.find(item => { return item.type === 'bun' })._id)
+            dispatch(getOrderRequest(newOrder))
+        }
+
+        setVisible(() => {
+            return !isVisible
+        })
+    }
 
     const { bun, ingredients } = useMemo(() => {
         return {
@@ -39,29 +61,34 @@ const BurgerConstructor = () => {
         }
     }, [ingredList])
 
+
+    const onChange = () => {
+        dispatch({
+            type: CHANGE_PRICE
+        });
+    };
+
     useEffect(() => {
-        const changePrice = () => {
-            let totalPrice = ingredList.reduce((prev, curr) => {
-                if (curr.type === 'bun') {
-                    return prev + curr.price * 2
-                } else {
-                    return prev + curr.price
-                }
+        onChange()
+    }, [ingredList])
 
-            }, 0)
-            setPrice(totalPrice)
+
+    const [, drop] = useDrop({
+        accept: "ingredElement",
+        drop: (item) => {
+            setIngredList(item)
         }
-        changePrice()
-    }, [data, setPrice])
-
+    })
 
 
 
     return (
         <section className='mt-25'>
-            <div className={`${BurgerConstructorStyles.list} pr-2`}>
+
+            <div className={`${BurgerConstructorStyles.list} pr-2`} ref={drop}>
                 <IngredientsList bun={bun} ingredients={ingredients} />
             </div>
+
             <div className={`${BurgerConstructorStyles.contentBottom} mt-10`}>
                 <div className={`${BurgerConstructorStyles.blockAmount} mr-10`}>
                     <p className={`text text_type_digits-medium ${BurgerConstructorStyles.textAmount}`}>{price}</p>

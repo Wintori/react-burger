@@ -1,9 +1,13 @@
 import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientsButtonsStyles from './ingredients-buttons.module.scss'
+import { current } from '@reduxjs/toolkit';
 
 const IngredientsButtons = (props) => {
-  const [current, setCurrent] = React.useState('one')
+
+  const { current, setCurrent } = props
+
+
 
   return (
     <div className={`${ingredientsButtonsStyles.buttons} mt-5`}>

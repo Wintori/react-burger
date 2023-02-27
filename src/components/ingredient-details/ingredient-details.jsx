@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../modal/modal';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetailsStyles from './ingredient-details.module.scss';
 import { dataItemPropTypes } from '../../utils/constants';
 
 const IngredientDetails = (props) => {
 
 
-    const { onClose } = props
     const { image_large, name, calories, proteins, fat, carbohydrates } = props.data;
 
     return (
@@ -42,7 +40,6 @@ const IngredientDetails = (props) => {
 }
 
 IngredientDetails.propTypes = {
-    onClose: PropTypes.func.isRequired,
     overlayHandler: PropTypes.func.isRequired,
     data: dataItemPropTypes
 }

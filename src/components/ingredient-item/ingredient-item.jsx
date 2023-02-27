@@ -4,18 +4,44 @@ import IngredientItemStyle from './ingredient-item.module.scss'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import { dataItemPropTypes } from '../../utils/constants';
+import { useSelector, useDispatch } from 'react-redux';
+import { useDrag } from "react-dnd";
+import { setCurrentItem, DELETE_CURRENT_ITEM } from '../../services/actions/ingredients'
 
 const IngredientItem = (props) => {
     const { image, price, name } = props.data
+    const dispatch = useDispatch();
+
     const [isVisible, setVisible] = useState(false)
 
     function handleModal() {
-        setVisible(() => !isVisible)
+
+        if (isVisible) {
+            dispatch({ type: DELETE_CURRENT_ITEM })
+            console.log('CLOSE')
+        } else {
+            dispatch(setCurrentItem(props.data))
+            console.log('OPEN')
+        }
+
+        setVisible(() => {
+            return !isVisible
+        })
     }
+
+    const [{ isDragging }, drag] = useDrag({
+        type: "ingredElement",
+        item: props.data,
+        collect: monitor => ({
+            isDragging: monitor.isDragging()
+        })
+    })
+
+    const opacity = isDragging ? .0 : 1
 
     return (
         <>
-            <li className={IngredientItemStyle.item} onClick={handleModal}>
+            <li style={{ opacity }} ref={drag} className={IngredientItemStyle.item} onClick={handleModal}>
                 <Counter count={1} size="default" extraClass="m-1" />
                 <img className={IngredientItemStyle.image} src={image} alt={name}></img>
                 <div className={`${IngredientItemStyle.price} mt-1 mb-1`}>
@@ -26,7 +52,7 @@ const IngredientItem = (props) => {
                     {name}
                 </p>
             </li>
-            {isVisible && <IngredientDetails onClose={handleModal} data={props.data} overlayHandler={handleModal} />}
+            {isVisible && <IngredientDetails data={props.data} overlayHandler={handleModal} />}
         </>
     );
 };

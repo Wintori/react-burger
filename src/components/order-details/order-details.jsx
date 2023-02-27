@@ -4,10 +4,11 @@ import Modal from '../modal/modal';
 import OrderDetailsStyles from './order-details.module.scss';
 import Done from '../../images/done.svg'
 import { BurgerContext } from '../../services/index';
+import { useSelector } from 'react-redux';
 
 const OrderDetails = (props) => {
     const { onClose } = props
-    const { order } = useContext(BurgerContext)
+    const order = useSelector(store => store.ingredientsReducer.order)
 
 
 
