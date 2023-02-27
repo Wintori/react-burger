@@ -1,12 +1,12 @@
-import React, { useContext, useState, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import BurgerConstructorStyles from './burger-constructor.module.scss'
 import IngredientsList from '../ingredients-list/ingredients-list';
 import OrderDetails from '../order-details/order-details';
 import { addItem } from '../../services/actions/ingredients'
-import { CHANGE_PRICE, getOrderRequest, REMOVE_BUN } from '../../services/actions/ingredients'
+import { CHANGE_PRICE, REMOVE_BUN } from '../../services/actions/ingredients'
+import { getOrderRequest, DELETE_ORDER } from '../../services/actions/order'
 import { useDrop } from 'react-dnd'
 
 
@@ -17,7 +17,7 @@ const BurgerConstructor = () => {
 
     const price = useSelector(store => store.ingredientsReducer.totalPrice)
     const ingredList = useSelector(store => store.ingredientsReducer.ingredList)
-    const [isVisible, setVisible] = useState(false)
+    const order = useSelector(store => store.orderReducer.order)
 
     const setIngredList = (item) => {
         let fl = true;
@@ -27,7 +27,13 @@ const BurgerConstructor = () => {
             }
         })
         if (fl) {
-            return dispatch(addItem(item));
+            dispatch(addItem(item));
+            if (item.type === 'bun') {
+                item.__v += 2;
+            } else {
+                item.__v += 1;
+            }
+
         } else {
             let fl1 = true;
             ingredList.map((el) => {
@@ -37,21 +43,21 @@ const BurgerConstructor = () => {
             })
             if (fl1) {
                 dispatch({ type: REMOVE_BUN });
+
                 dispatch(addItem(item));
+                item.__v += 2;
             }
         }
     }
 
     function handleModal() {
-        if (!isVisible) {
+        if (!order) {
             const newOrder = ingredList.map((item) => { return item._id })
             newOrder.push(ingredList.find(item => { return item.type === 'bun' })._id)
             dispatch(getOrderRequest(newOrder))
+        } else {
+            dispatch({ type: DELETE_ORDER })
         }
-
-        setVisible(() => {
-            return !isVisible
-        })
     }
 
     const { bun, ingredients } = useMemo(() => {
@@ -98,7 +104,7 @@ const BurgerConstructor = () => {
                     Оформить заказ
                 </Button>
 
-                {isVisible && <OrderDetails onClose={handleModal} />}
+                {order && <OrderDetails onClose={handleModal} />}
             </div>
         </section>
     );

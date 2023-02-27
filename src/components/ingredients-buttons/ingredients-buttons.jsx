@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientsButtonsStyles from './ingredients-buttons.module.scss'
 import { current } from '@reduxjs/toolkit';
@@ -24,5 +25,11 @@ const IngredientsButtons = (props) => {
   )
 
 }
+
+IngredientsButtons.propTypes = {
+  setCurrent: PropTypes.func.isRequired,
+  current: PropTypes.string.isRequired
+}
+
 
 export default IngredientsButtons;

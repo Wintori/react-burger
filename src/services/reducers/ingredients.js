@@ -5,21 +5,14 @@ const initialState = {
     items: [],
     itemsRequest: false,
     itemsFailed: false,
-    order: null,
-    orderRequest: false,
-    orderFailed: false,
 
     ingredList: [],
-    isOpen: false,
     totalPrice: null,
-    currentItem: {}
+    currentItem: null
 };
 
 export const ingredientsReducer = (state = initialState, action) => {
     switch (action.type) {
-        // case DELETE_ITEM: {
-        //     return { ...state, ingredList: [] };
-        // }
         case ADD_ITEM:
             return {
                 ...state,
@@ -28,14 +21,13 @@ export const ingredientsReducer = (state = initialState, action) => {
                     action.ingredList
                 ]
             }
-        // case ADD_ITEM: {
-        //     return {
-        //         ...state,
-        //         ingredList: [...state.ingredList, ...state.items.filter(item => item.id === action.id)]
-        //     };
-        // }
         case DELETE_ITEM: {
-            return { ...state, ingredList: [...state.ingredList].filter(item => item.id !== action.id) };
+            const tempItems = [...state.items].map(item => item._id === action._id ? item.__v -= 1 : item.__v = item.__v)
+            return {
+                ...state,
+                ingredList: [...state.ingredList].filter(item => item.id !== action.id),
+                items: [...state.items, tempItems]
+            };
         }
         case CHANGE_PRICE:
             return {
@@ -48,12 +40,6 @@ export const ingredientsReducer = (state = initialState, action) => {
                     }
                 }, 0)
             }
-        case OPEN_ORDER_MODAL: {
-            return { ...state, isOpen: true };
-        }
-        case CLOSE_ORDER_MODAL: {
-            return { ...state, isOpen: false };
-        }
         case GET_ITEMS_REQUEST: {
             return {
                 ...state,
@@ -66,22 +52,14 @@ export const ingredientsReducer = (state = initialState, action) => {
         case GET_ITEMS_FAILED: {
             return { ...state, itemsFailed: true, itemsRequest: false };
         }
-        case GET_ORDER_REQUEST: {
-            return {
-                ...state,
-                orderRequest: true
-            };
-        }
-        case GET_ORDER_SUCCESS: {
-            return { ...state, orderFailed: false, order: action.order, orderRequest: false };
-        }
-        case GET_ORDER_FAILED: {
-            return { ...state, orderFailed: true, orderRequest: false };
-        }
         case SWAP_INGREDIENTS: {
+            const newArray = [...state.ingredList]
+            newArray.splice(action.dragIndex, 1)
+            newArray.splice(action.hoverIndex, 0, state.ingredList[action.dragIndex])
+            
             return {
                 ...state,
-                ingredList: action.ingredList
+                ingredList: newArray
             }
         }
         case SET_CURRENT_ITEM: {
@@ -93,11 +71,16 @@ export const ingredientsReducer = (state = initialState, action) => {
         case DELETE_CURRENT_ITEM: {
             return {
                 ...state,
-                currentItem: {}
+                currentItem: null
             }
         }
         case REMOVE_BUN: {
-            return { ...state, ingredList: [...state.ingredList].filter(item => item.type !== 'bun') };
+            const tempItems = [...state.items].map(item => item.type === 'bun' ? item.__v = 0 : item.__v = item.__v)
+            return {
+                ...state,
+                ingredList: [...state.ingredList].filter(item => item.type !== 'bun'),
+                items: [...state.items, tempItems]
+            };
         }
         default: {
             return state;

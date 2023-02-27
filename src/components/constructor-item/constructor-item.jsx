@@ -28,7 +28,7 @@ const ConstructorItem = (props) => {
                 handlerId: monitor.getHandlerId(),
             }
         },
-        drop(item, monitor) {
+        drop(item) {
             if (!ref.current) {
                 return
             }
@@ -41,30 +41,7 @@ const ConstructorItem = (props) => {
                 return
             }
             
-            // const hoverBoundingRect = ref.current?.getBoundingClientRect()
-            // console.log(hoverBoundingRect)
-            // const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-            // console.log(hoverMiddleY)
-            // const clientOffset = monitor.getClientOffset()
-            // console.log(clientOffset)
-            // const hoverClientY = clientOffset.y - hoverBoundingRect.top
-            // console.log(hoverClientY)
-            // if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-            //     return
-            // }
-
-            // if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-            //     return
-            // }
             swapIngred(item, props.data)
-            // console.log('SWAP')
-            console.log(dragIndex)
-            console.log(hoverIndex)
-            // item.id = hoverIndex
-            // console.log(ref.current)
-            // console.log(item)
-            // console.log(props.data)
-            // console.log(monitor)
         },
     })
     const [{ isDragging }, drag] = useDrag({
@@ -83,7 +60,8 @@ const ConstructorItem = (props) => {
     const handleDelete = () => {
         dispatch({
             type: DELETE_ITEM,
-            id: props.data.id
+            id: props.data.id,
+            _id: props.data._id
         })
     }
 

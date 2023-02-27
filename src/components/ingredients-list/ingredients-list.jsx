@@ -17,14 +17,7 @@ const IngredientsList = (props) => {
         const dragIndex = ingredList.indexOf(dragItem)
         const hoverIndex = ingredList.indexOf(hoverItem)
         if (dragItem.id && dragItem.type !== 'bun') {
-            const newArray = [...ingredList]
-            newArray.splice(dragIndex, 1)
-            newArray.splice(hoverIndex, 0, dragItem)
-            console.log(newArray)
-            dispatch(swapIngredients(newArray))
-            
-        } else {
-            console.log('Что-то пошло не так...')
+            dispatch(swapIngredients(dragIndex, hoverIndex))
         }
     }, [props.ingredients, dispatch])
 
@@ -47,9 +40,9 @@ const IngredientsList = (props) => {
     );
 }
 
-// IngredientsList.propTypes = {
-//     bun: dataItemPropTypes,
-//     ingredients: dataPropTypes
-// }
+IngredientsList.propTypes = {
+    bun: dataItemPropTypes,
+    ingredients: dataPropTypes
+}
 
 export default IngredientsList;

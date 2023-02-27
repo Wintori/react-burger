@@ -1,2 +1,0 @@
-export const OPEN_MODAL_DATA = 'ADD_MODAL_DATA';
-export const CLOSE_MODAL_DATA = 'DELETE_MODAL_DATA';

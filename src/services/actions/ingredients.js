@@ -1,18 +1,12 @@
-import { getData, getOrder } from '../../utils/api';
+import { getData } from '../../utils/api';
 
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const ADD_ITEM = 'ADD_ITEM';
 export const CHANGE_PRICE = 'CHANGE_PRICE';
-export const OPEN_ORDER_MODAL = 'OPEN_ORDER_MODAL';
-export const CLOSE_ORDER_MODAL = 'CLOSE_ORDER_MODAL';
 
 export const GET_ITEMS_REQUEST = 'GET_ITEMS_REQUEST';
 export const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';
 export const GET_ITEMS_FAILED = 'GET_ITEMS_FAILED';
-
-export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
-export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
-export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
 
 export const SWAP_INGREDIENTS = 'SORT_INGREDIENTS';
 
@@ -32,11 +26,19 @@ export const addItem = (ingredList) => {
     }
 }
 
-export const swapIngredients = (ingredList) => {
+// export const swapIngredients = (ingredList) => {
+
+//     return {
+//         type: SWAP_INGREDIENTS,
+//         ingredList
+//     }
+// }
+export const swapIngredients = (dragIndex, hoverIndex) => {
 
     return {
         type: SWAP_INGREDIENTS,
-        ingredList
+        dragIndex,
+        hoverIndex
     }
 }
 
@@ -56,47 +58,24 @@ export function getItemsRequest() {
             type: GET_ITEMS_REQUEST
         })
         // Запрашиваем данные у сервера
-        getData().then(res => {
-            if (res && res.success) {
-                // В случае успешного получения данных вызываем экшен
-                // для записи полученных данных в хранилище
-                dispatch({
-                    type: GET_ITEMS_SUCCESS,
-                    items: res.data
-                })
-            } else {
+        getData()
+            .then(res => {
+                if (res && res.success) {
+                    // В случае успешного получения данных вызываем экшен
+                    // для записи полученных данных в хранилище
+                    dispatch({
+                        type: GET_ITEMS_SUCCESS,
+                        items: res.data
+                    })
+                } else {
+                    return Promise.reject(`Ошибка: ${res.status}`);
+                }
+            })
+            .catch(() => {
                 // Если произошла ошибка, отправляем соответствующий экшен
                 dispatch({
                     type: GET_ITEMS_FAILED
                 })
-            }
-        })
-    }
-}
-
-export function getOrderRequest(list) {
-    return function (dispatch) {
-        // Проставим флаг в хранилище о том, что мы начали выполнять запрос
-        // Это нужно, чтоб отрисовать в интерфейсе лоадер или заблокировать 
-        // ввод на время выполнения запроса
-        dispatch({
-            type: GET_ORDER_REQUEST
-        })
-        // Запрашиваем данные у сервера
-        getOrder(list).then(res => {
-            if (res && res.success) {
-                // В случае успешного получения данных вызываем экшен
-                // для записи полученных данных в хранилище
-                dispatch({
-                    type: GET_ORDER_SUCCESS,
-                    order: res.order.number
-                })
-            } else {
-                // Если произошла ошибка, отправляем соответствующий экшен
-                dispatch({
-                    type: GET_ORDER_FAILED
-                })
-            }
-        })
+            })
     }
 }
