@@ -1,0 +1,26 @@
+.block {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: scroll;
+    width: 608px;
+    margin: 0;
+}
+
+
+.orders {
+    display: flex;
+}
+
+.orderBlock {
+    width: 280px;
+}

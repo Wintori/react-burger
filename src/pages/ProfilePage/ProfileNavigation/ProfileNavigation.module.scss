@@ -1,0 +1,21 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+    width: 100%;
+}
+
+.link {
+    display: flex;
+    height: 64px;
+    text-align: left;
+    text-decoration: none;
+}
+
+.link_text {
+    align-self: center;
+}
+
+.link_active {
+    color: #F2F2F3;;
+}

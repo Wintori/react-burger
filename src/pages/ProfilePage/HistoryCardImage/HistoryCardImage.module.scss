@@ -1,0 +1,13 @@
+.content {
+    box-sizing: border-box;
+    width: 64px;
+    height: 64px;
+    background-color: #131316;
+    border-radius: 100px;
+    margin: 0;
+    padding: 0;
+}
+
+.content:not(:first-child) {
+    background-color: red;
+}
